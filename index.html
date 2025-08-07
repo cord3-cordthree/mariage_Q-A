@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - よくあるご質問</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f8f8f8; /* 非常に明るいグレー */
+            color: #333333; /* 濃いグレー */
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #ffffff; /* 白 */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* 柔らかな影 */
+        }
+        h1 {
+            text-align: center;
+            color: #5a6a8c; /* 落ち着いた青みがかったグレー */
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            letter-spacing: 1px;
+        }
+        .search-area {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #eef1f5; /* 非常に薄い青みがかったグレー */
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-area input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #d0d8e2; /* ソフトなボーダー */
+            border-radius: 6px;
+            font-size: 1em;
+            margin-right: 10px;
+            max-width: 70%;
+        }
+        .search-area button {
+            padding: 12px 25px;
+            background-color: #5a6a8c; /* 質問文と同じ色 */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .search-area button:hover {
+            background-color: #4a5c7f; /* ホバーで少し濃く */
+        }
+
+        .tag-area {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #eef1f5; /* 検索エリアと同じ背景 */
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap; /* タグが収まらない場合に折り返す */
+            gap: 10px; /* タグ間のスペース */
+            justify-content: center;
+        }
+        .tag-area .tag-button {
+            padding: 10px 20px;
+            background-color: #d0d8e2; /* デフォルトのタグ色 */
+            color: #333333;
+            border: none;
+            border-radius: 20px; /* 丸みを帯びたデザイン */
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            white-space: nowrap; /* タグのテキストが改行されないように */
+        }
+        .tag-area .tag-button:hover {
+            background-color: #b0bfd6; /* ホバーで少し濃く */
+        }
+        .tag-area .tag-button.active {
+            background-color: #a0b9d9; /* アクティブなタグの色 */
+            color: white;
+            font-weight: bold;
+        }
+
+        .faq-item {
+            margin-bottom: 25px;
+            border-bottom: 1px solid #e5e5e5; /* 薄いボーダー */
+            padding-bottom: 20px;
+            transition: all 0.3s ease-in-out; /* 表示・非表示のトランジション */
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .question {
+            font-weight: bold;
+            color: #5a6a8c; /* 落ち着いた青みがかったグレー */
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .question::before {
+            content: "Q. ";
+            color: #e0b9a6; /* ソフトなローズ/ベージュ */
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        .answer {
+            color: #666666; /* 中間のグレー */
+            padding-left: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .answer::before {
+            content: "A. ";
+            color: #92b0ac; /* 落ち着いたグリーン/ブルー */
+            margin-right: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FAQ - よくあるご質問</h1>
+
+        <div class="search-area">
+            <input type="text" id="searchInput" placeholder="キーワードを入力して検索">
+            <button onclick="searchFAQs()">検索</button>
+        </div>
+
+        <div class="tag-area" id="tagArea">
+            <button class="tag-button active" data-tag="all" onclick="filterByTag('all', this)">全て</button>
+            <button class="tag-button" data-tag="ドレス" onclick="filterByTag('ドレス', this)">ドレス</button>
+            <button class="tag-button" data-tag="試着" onclick="filterByTag('試着', this)">試着</button>
+            <button class="tag-button" data-tag="レンタル・料金" onclick="filterByTag('レンタル・料金', this)">レンタル・料金</button>
+            <button class="tag-button" data-tag="購入" onclick="filterByTag('購入', this)">購入</button>
+            <button class="tag-button" data-tag="メンズ" onclick="filterByTag('メンズ', this)">メンズ</button>
+        </div>
+
+        <div class="faq-list">
+            <!-- 各Q&A項目にデータタグを追加 -->
+            <div class="faq-item" data-tags="ドレス">
+                <div class="question">どんなブランドのドレスがレンタル出来ますか？</div>
+                <div class="answer">ヨーロッパをはじめとするインポートブランドドレスを中心に、ファッションブランドとのコラボレーションによるスペシャルエディションのドレスや、クリオマリアージュがこだわり抜いて製作したオリジナルドレスなど、幅広い商品をご用意しております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="購入 ドレス">
+                <div class="question">ドレスを購入することは出来ますか？</div>
+                <div class="answer">当店では海外ブランドとオリジナルウエディングドレスのパターンオーダーを承っております。当店でしかオーダーすることが出来ないブランドのウエディングドレスもございますので、詳細はオーダーメイドページをご覧下さい。尚、コラボレーションなど一部のレンタル商品につきましては、ご購入をお断りさせて頂いておりますのであらかじめご了承下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="メンズ レンタル">
+                <div class="question">メンズのタキシードや小物も一緒にレンタルしたいのですが…</div>
+                <div class="answer">JOHN LAWRENCE SULLIVANを始め、ご新郎様用のタキシードや小物（シューズ・ネクタイ・ポケットチーフ・カフスボタン・ベルト・ハット・ラペルピン、等）も多数取り揃えております。また、生地、デザインからご指定頂ける、オーダータキシードも承っております。更に、CA4LAのシルクハットやgiraffeの小物など、当店のみの取り扱い商品も、人気でございます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="">
+                <div class="question">パンフレットが欲しいのですが…</div>
+                <div class="answer">WEBカタログまたはブライズページ・グルームページよりランナップをご覧ください。また各SNSにて随時新作やイベントなどのNEWSを配信しております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="ドレス メンズ">
+                <div class="question">お店には何着くらいドレスがありますか？</div>
+                <div class="answer">当店ではご新婦様用のドレス約300点、ご新郎様用のタキシード約60点の他、アクセサリーや雑貨など豊富な小物をご用意しております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="ドレス">
+                <div class="question">ミニやミディ丈のドレスもありますか？</div>
+                <div class="answer">ミニ、ミディ丈はもちろんのこと、他店にはないオリジナリティあふれたドレスをご用意してお待ちしております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル 小物">
+                <div class="question">小物だけのレンタルも出来るのでしょうか？</div>
+                <div class="answer">もちろん小物のみのレンタルも歓迎致します。当店ではティアラやボンネ、トーク帽などのヘッドアクセサリーや、ネックレス、イヤリング、ブレスレットなど国内外の小物を多数取り揃えております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="購入 小物">
+                <div class="question">小物の購入は可能でしょうか？</div>
+                <div class="answer">ご購入いただけます。当店では、各ブランドより厳選したアクセサリーをはじめ、ベールやグローブなど、ウエディングシーンに欠かせないアイテムも販売しております。店頭以外にも、クリオマリアージュオンラインストアよりご購入いただく事ができます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">レンタル料金が心配なのですが…</div>
+                <div class="answer">ご新婦様ですと一式10万円台から、ご新郎様ですと一式7万円前後からご用意がございます。お客様のご予算に添えるようコーディネートをさせて頂きますのでご相談下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">クリーニング料金は掛かりますか？</div>
+                <div class="answer">レンタル時に別途、メンテナンス料金(ドレス・タキシードのみ対象)を頂いております。クリーニング代はメンテナンス料金に含まれていますので追加で頂くことはありません。但し復元が難しい汚れや破損に関しては買い取りをお願いする場合もございますので予めご了承下さい。<br>※メンテナンス料金には最適なおサイズでお召頂く為のお直し・結婚式前後のクリーニング代などを指します。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">試着には予約が必要ですか？</div>
+                <div class="answer">当店は完全予約制となっており、お電話でのご予約をお勧めしております。その他、予約フォームからのご予約も可能です。尚、大変多くのご予約を頂いておりますので、2週間以内のご来店をご希望の際には、必ずお電話でのご予約をお願い致します。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着 レンタル・料金">
+                <div class="question">試着には料金がかかりますか？</div>
+                <div class="answer">挙式日の7か月以上前のご試着に関しましては、試着料金として5,500円(税込)を頂戴しております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">会場が決まっていなくても試着は可能ですか？</div>
+                <div class="answer">ご予約の際にスタイリストへご相談ください。また、会場をお探しのお客様へ、すてきな会場のご紹介も行っております。こだわりのレストラン、カフェ、ホテル、ハワイなどご希望に合わせてご紹介させて頂きます。詳細はお気軽にお問い合わせ下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="">
+                <div class="question">前撮りを検討しているのですが。</div>
+                <div class="answer">当店では、こだわりの衣装店ならではの素敵なフォトプランをご提供しております。弊社併設スタジオ撮影の他、おしゃれなスタジオ、ロケフォトまで、幅広いご提案が可能となっております。尚、お得なパッケージプランもご用意しております。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着 メンズ">
+                <div class="question">一人で試着をしに行っても大丈夫でしょうか？</div>
+                <div class="answer">お一人様でのご来店も歓迎致します。写真撮影などはスタッフにお申し付け下さい。もちろんご新郎様お一人様でのご来店も歓迎致します。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">試着できるのは1日だけですか？</div>
+                <div class="answer">ご納得のいくドレスが見つかるまで何回でもご来店下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">試着の際の下着は普段通りでいいのでしょうか？</div>
+                <div class="answer">普段通りのお下着でお越し下さいませ。ドレスのデザインやサイズなどに見合ったドレス専用のブライダルインナーをお勧めしており、店頭でもご購入が可能です。ご試着の際はサンプルをお貸出し致しますのでお越しいただく際は普段着用されている下着で問題ございません。もし、お式当日にご使用されたいお手持ちの下着がございましたら、ご持参頂きましたら合わせてフィッティングが可能でございます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">試着の際に何か持参した方が良いものはありますか？</div>
+                <div class="answer">特にはございません。ドレスに合わせてシューズをお履き頂きますので、ストッキングなどをご持参して頂きますと履きやすいかと思います。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着">
+                <div class="question">試着にはどのくらいの時間がかかりますか？</div>
+                <div class="answer">初めてご来店されたお客様には2時間ほどお時間を頂いております。ご新郎様用のタキシードのお見立ては、1時間ほどが目安となります。</div>
+            </div>
+
+            <div class="faq-item" data-tags="購入 小物">
+                <div class="question">ブライダルインナーは購入可能ですか？</div>
+                <div class="answer">可能です。セパレートタイプ、ビスチェタイプ、ヌーブラなどドレスのデザインに応じてご案内をさせて頂きます。ブライダルインナー、グローブ、ベールは販売商品としてご用意させて頂いております。ドレスに合わせてご検討下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">地方で式を挙げるのですがレンタル可能ですか？</div>
+                <div class="answer">可能です。全国に配送させて頂きます。尚、送料はお客様のご負担となりますのでご了承下さい。また、沖縄・九州・北海道・一部の離島での挙式のお客様は、6泊7日を通常プランとさせて頂いておりますので、レンタル日数を気にせず安心してご利用頂けます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">海外挙式ですがレンタル可能ですか？</div>
+                <div class="answer">可能です。但し海外への発送は行なっておりませんので、国内の指定住所まで配送、もしくは来店でのお引渡しをお願いしております。海外挙式のお客様は9泊10日を通常プランとさせて頂いておりますので、レンタル日数を気にせず安心してご利用頂けます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">二次会での使用も可能ですか？</div>
+                <div class="answer">1.5次会や2次会でのご使用も可能です。披露宴のみならず、2次会でも素敵なドレスをご着用下さい。</div>
+            </div>
+
+            <div class="faq-item" data-tags="ドレス">
+                <div class="question">ドレスのサイズのお直しは可能ですか？</div>
+                <div class="answer">レンタルドレスのお直しはメンテナンス料金の範囲内にて対応させて頂きます。但し、商品によってはお直しが難しい場合もございますのでご試着の際にスタイリストよりご案内をさせて頂きます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル・料金">
+                <div class="question">代金の支払いは現金のみでしょうか？</div>
+                <div class="answer">レンタル料金、及びそれに付随する全ての代金は現金か下記の会社のクレジットカードが(１回払いのみ)ご利用可能です。また、ジャックスクレジットローンでのお支払いも可能でございます。<br>取扱いカード：VISA、MASTER、JCB、銀聯、アメックス</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着 メンズ">
+                <div class="question">スタイリストと二人きりでお話するのは緊張するのですが…</div>
+                <div class="answer">ご新婦様には女性のスタッフが付き添わせて頂きますのでご安心下さい。ご新郎様にも当店のスタッフが付き添いをさせて頂きます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="購入">
+                <div class="question">エンゲージリング・マリッジリングの取り扱いはありますか？</div>
+                <div class="answer">結婚するお二人に向けたハイセンスなエンゲージリング、マリッジリングをご用意しております。 現在リングを探されている方も、これから探される方も、こだわりのクリエーターが生み出す一生に一度の逸品を、クリオマリアージュのセレクトでご覧頂けます。</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentActiveTag = 'all'; // 現在選択されているタグを保持する変数
+
+        /**
+         * タグに基づいてFAQ項目をフィルタリングします。
+         * @param {string} selectedTag - 選択されたタグ ('all'を含む)。
+         * @param {HTMLElement} clickedButton - クリックされたタグボタンの要素。
+         */
+        function filterByTag(selectedTag, clickedButton) {
+            currentActiveTag = selectedTag; // アクティブなタグを更新
+
+            // 全てのFAQ項目を取得
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // 検索ボックスをクリア
+            document.getElementById('searchInput').value = '';
+
+            // 全てのタグボタンのアクティブ状態をリセット
+            document.querySelectorAll('.tag-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            // クリックされたボタンをアクティブにする
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+
+            // 各FAQ項目について表示・非表示を切り替え
+            faqItems.forEach(item => {
+                const itemTags = item.dataset.tags ? item.dataset.tags.split(' ') : []; // 項目に設定されているタグの配列
+
+                if (selectedTag === 'all' || itemTags.includes(selectedTag)) {
+                    item.style.display = ''; // 表示
+                } else {
+                    item.style.display = 'none'; // 非表示
+                }
+            });
+        }
+
+        /**
+         * キーワードに基づいてFAQ項目を検索します。
+         * タグフィルターの状態はリセットされます。
+         */
+        function searchFAQs() {
+            const searchKeyword = document.getElementById('searchInput').value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            // 検索時は全てのタグボタンのアクティブ状態をリセット
+            document.querySelectorAll('.tag-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            currentActiveTag = null; // 検索中はアクティブタグなし
+
+            if (searchKeyword === '') {
+                // 検索キーワードが空の場合、「全て」を表示する（初期状態に戻る）
+                filterByTag('all', document.querySelector('.tag-button[data-tag="all"]'));
+                return;
+            }
+
+            faqItems.forEach(item => {
+                const itemText = item.textContent.toLowerCase();
+
+                if (itemText.includes(searchKeyword)) {
+                    item.style.display = ''; // 表示
+                } else {
+                    item.style.display = 'none'; // 非表示
+                }
+            });
+        }
+
+        // ページロード時に「全て」タグをアクティブにして全項目を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            filterByTag('all', document.querySelector('.tag-button[data-tag="all"]'));
+        });
+
+        // 検索入力欄でEnterキーが押されたら検索を実行
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchFAQs();
+            }
+        });
+    </script>
+</body>
+</html>
