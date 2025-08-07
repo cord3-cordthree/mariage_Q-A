@@ -142,14 +142,76 @@
         <div class="tag-area" id="tagArea">
             <button class="tag-button active" data-tag="all" onclick="filterByTag('all', this)">全て</button>
             <button class="tag-button" data-tag="ドレス" onclick="filterByTag('ドレス', this)">ドレス</button>
-            <button class="tag-button" data-tag="試着" onclick="filterByTag('試着', this)">試着</button>
             <button class="tag-button" data-tag="レンタル・料金" onclick="filterByTag('レンタル・料金', this)">レンタル・料金</button>
-            <button class="tag-button" data-tag="購入" onclick="filterByTag('購入', this)">購入</button>
+            <button class="tag-button" data-tag="サイズ" onclick="filterByTag('サイズ', this)">サイズ</button>
+            <button class="tag-button" data-tag="試着" onclick="filterByTag('試着', this)">試着</button>
+            <button class="tag-button" data-tag="小物" onclick="filterByTag('小物', this)">小物</button>
+            <button class="tag-button" data-tag="キャンセル" onclick="filterByTag('キャンセル', this)">キャンセル</button>
+            <button class="tag-button" data-tag="フォトウェディング" onclick="filterByTag('フォトウェディング', this)">フォトウェディング</button>
+            <button class="tag-button" data-tag="挙式" onclick="filterByTag('挙式', this)">挙式</button>
+            <button class="tag-button" data-tag="来店" onclick="filterByTag('来店', this)">来店</button>
             <button class="tag-button" data-tag="メンズ" onclick="filterByTag('メンズ', this)">メンズ</button>
+            <button class="tag-button" data-tag="購入" onclick="filterByTag('購入', this)">購入</button>
         </div>
 
         <div class="faq-list">
-            <!-- 各Q&A項目にデータタグを追加 -->
+            <!-- ここから指定されたQ&Aの順番 -->
+
+            <div class="faq-item" data-tags="レンタル・料金 ドレス">
+                <div class="question">ドレスのレンタル料金はいくらですか？</div>
+                <div class="answer">洋装ドレスは概ね50,000円～150,000円（税別）、和装は100,000円～200,000円（税別）が相場です。平日やオフシーズン（夏・冬）を選ぶと、ハイシーズン（春・秋）よりも割安になる場合があります。</div>
+            </div>
+
+            <div class="faq-item" data-tags="サイズ ドレス">
+                <div class="question">ドレスのサイズは何号まで対応していますか？</div>
+                <div class="answer">ドレスはヌード寸法で5号～15号までご用意しています。補整インナー着用時は測定値が変わる場合がありますので、ご注意ください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル フォトウェディング ドレス">
+                <div class="question">ロケーション撮影でドレスをレンタルできますか？</div>
+                <div class="answer">はい、可能です。一般的なスタジオ撮影は3か月前、屋外ロケーション撮影は6か月前までにご予約いただくと余裕をもって準備ができます。人気のシーズン（桜・紅葉など）は1年前に埋まる場合もありますので、お早めのご検討をおすすめします。</div>
+            </div>
+
+            <div class="faq-item" data-tags="フォトウェディング 来店">
+                <div class="question">フォトウェディングの予約はいつ頃行えばいいですか？</div>
+                <div class="answer">スタジオ撮影は遅くとも撮影日の3か月前まで、ロケーション撮影は遅くとも撮影日の6か月前までにご予約ください。春・秋のハイシーズンは特に予約が取りにくいため、余裕をもって4～6か月前からお探しください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="キャンセル">
+                <div class="question">キャンセル料はいつまで無料ですか？</div>
+                <div class="answer">発送前のキャンセル・変更はご利用日の20日前まで無料です。ご利用日の20日未満は1商品につき一律2,000円、発送後キャンセルは1商品につき一律2,000円（商品到着日の翌日までに返送かつ連絡が必要）です。それ以降や商品使用後のキャンセルは承れませんのでご注意ください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="試着 来店 小物">
+                <div class="question">試着はできますか？予約方法や持ち物を教えてください。</div>
+                <div class="answer">事前予約制で承っております。LINE公式アカウントまたはお電話にてご希望日時をお知らせください。持ち物は普段お召しの下着と、必要であれば補整インナーをご持参ください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル 小物">
+                <div class="question">ベールやシューズなどの小物はレンタルできますか？</div>
+                <div class="answer">ベール・ティアラ・イヤリング・グローブ・シューズなど、ドレスに合わせた各種小物を幅広くご用意しております。コーディネートやヒール高さのご相談もお気軽にどうぞ。</div>
+            </div>
+
+            <div class="faq-item" data-tags="メンズ レンタル 小物">
+                <div class="question">タキシードやメンズ小物も一緒に借りられますか？</div>
+                <div class="answer">JOHN LAWRENCE SULLIVANを始め、ご新郎様用のタキシードや小物（シューズ・ネクタイ・ポケットチーフ・カフスボタン・ベルト・ハット・ラペルピン、等）も多数取り揃えております。また、生地、デザインからご指定頂ける、オーダータキシードも承っております。更に、CA4LAのシルクハットやgiraffeの小物など、当店のみの取り扱い商品も、人気でございます。</div>
+            </div>
+
+            <div class="faq-item" data-tags="レンタル 挙式">
+                <div class="question">挙式用の衣装のみレンタルすることはできますか？</div>
+                <div class="answer">挙式当日のみのご利用でもご予約いただけます。ドレス単体、タキシード単体のレンタルプランがございますので、まずは挙式日と会場をお知らせください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="購入 ドレス">
+                <div class="question">ドレスの購入（セミオーダー）はできますか？</div>
+                <div class="answer">当店オリジナルドレスのセミオーダーでのご購入は可能です。一部輸入ブランドはレンタル専用につき販売対応ができませんので、詳細はオーダーメイド専用ページをご確認ください。</div>
+            </div>
+
+            <div class="faq-item" data-tags="来店">
+                <div class="question">初めての来店予約方法を教えてください。</div>
+                <div class="answer">LINE公式アカウントにてトークから、または公式Webフォームにて「初来店予約」とお伝えいただき、お名前・挙式日・来店希望日を第3希望までお知らせください。</div>
+            </div>
+
             <div class="faq-item" data-tags="ドレス">
                 <div class="question">どんなブランドのドレスがレンタル出来ますか？</div>
                 <div class="answer">ヨーロッパをはじめとするインポートブランドドレスを中心に、ファッションブランドとのコラボレーションによるスペシャルエディションのドレスや、クリオマリアージュがこだわり抜いて製作したオリジナルドレスなど、幅広い商品をご用意しております。</div>
@@ -215,7 +277,7 @@
                 <div class="answer">ご予約の際にスタイリストへご相談ください。また、会場をお探しのお客様へ、すてきな会場のご紹介も行っております。こだわりのレストラン、カフェ、ホテル、ハワイなどご希望に合わせてご紹介させて頂きます。詳細はお気軽にお問い合わせ下さい。</div>
             </div>
 
-            <div class="faq-item" data-tags="">
+            <div class="faq-item" data-tags="フォトウェディング">
                 <div class="question">前撮りを検討しているのですが。</div>
                 <div class="answer">当店では、こだわりの衣装店ならではの素敵なフォトプランをご提供しております。弊社併設スタジオ撮影の他、おしゃれなスタジオ、ロケフォトまで、幅広いご提案が可能となっております。尚、お得なパッケージプランもご用意しております。</div>
             </div>
@@ -284,6 +346,8 @@
                 <div class="question">エンゲージリング・マリッジリングの取り扱いはありますか？</div>
                 <div class="answer">結婚するお二人に向けたハイセンスなエンゲージリング、マリッジリングをご用意しております。 現在リングを探されている方も、これから探される方も、こだわりのクリエーターが生み出す一生に一度の逸品を、クリオマリアージュのセレクトでご覧頂けます。</div>
             </div>
+            <!-- 指定されたQ&Aの順番ここまで -->
+
         </div>
     </div>
 
